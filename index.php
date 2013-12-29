@@ -421,7 +421,7 @@ if (isset($_POST['login']))
         ban_loginFailed();
         $redir = '';
         if (isset($_GET['post'])) { $redir = '&post='.urlencode($_GET['post']).(!empty($_GET['title'])?'&title='.urlencode($_GET['title']):'').(!empty($_GET['source'])?'&source='.urlencode($_GET['source']):'');  }
-        echo '<script language="JavaScript">alert("Wrong login/password.");document.location=\'?do=login'.$redir.'\';</script>'; // Redirect to login screen.
+        echo '<script language="JavaScript">alert("Wrong login/password.");document.location=\'?'.$redir.'\';</script>'; // Redirect to login screen.
         exit;
     }
 }
@@ -1354,7 +1354,7 @@ function renderPage()
             $GLOBALS['salt'] = sha1(uniqid('',true).'_'.mt_rand()); // Salt renders rainbow-tables attacks useless.
             $GLOBALS['hash'] = sha1($_POST['setpassword'].$GLOBALS['login'].$GLOBALS['salt']);
             writeConfig();
-            echo '<script language="JavaScript">alert("Your password has been changed.");document.location=\'?do=tools\';</script>';
+            echo '<script language="JavaScript">alert("Your password has been changed.");document.location=\'?\';</script>';
             exit;
         }
         else // show the change password form.
@@ -1384,7 +1384,7 @@ function renderPage()
             $GLOBALS['disablejquery']=!empty($_POST['disablejquery']);
             $GLOBALS['privateLinkByDefault']=!empty($_POST['privateLinkByDefault']);
             writeConfig();
-            echo '<script language="JavaScript">alert("Configuration was saved.");document.location=\'?do=tools\';</script>';
+            echo '<script language="JavaScript">alert("Configuration was saved.");document.location=\'?\';</script>';
             exit;
         }
         else // Show the configuration form.
@@ -1823,8 +1823,7 @@ function buildLinkList($PAGE,$LINKSDB)
         $link = $linksToDisplay[$keys[$i]];
         $link['description']=nl2br(keepMultipleSpaces(text2clickable(htmlspecialchars($link['description']))));
         $title=$link['title'];
-        $classLi =  $i%2!=0 ? '' : 'publicLinkHightLight';
-        $link['class'] = ($link['private']==0 ? $classLi : 'private');
+        $link['class'] = 'color' . ($i % 4 + 1);
         $link['localdate']=linkdate2locale($link['linkdate']);
         $taglist = explode(' ',$link['tags']);
         uasort($taglist, 'strcasecmp');
@@ -2080,7 +2079,7 @@ function install()
         $GLOBALS['hash'] = sha1($_POST['setpassword'].$GLOBALS['login'].$GLOBALS['salt']);
         $GLOBALS['title'] = (empty($_POST['title']) ? 'Shared links on '.htmlspecialchars(indexUrl()) : $_POST['title'] );
         writeConfig();
-        echo '<script language="JavaScript">alert("Shaarli is now configured. Please enter your login/password and start shaaring your links !");document.location=\'?do=login\';</script>';
+        echo '<script language="JavaScript">alert("Shaarli is now configured. Please enter your login/password and start shaaring your links !");document.location=\'?\';</script>';
         exit;
     }
 

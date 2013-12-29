@@ -1,26 +1,67 @@
+                <div id="navigable">
+			<div class="fixed">
+				<div id="search">
+					<form method="GET" name="searchform" class="first">
+                                                {if="!empty($linkcount)"}<input type="text" name="searchterm" placeholder="Recherche parmi {$linkcount} liens" />{else}<input type="text" name="searchterm" placeholder="Recherche parmi les liens" />{/if}<input type="image" src="images/search.png#" />
+					</form>
+					<form method="GET" name="tagfilter">
+						<input type="text" name="searchtags" id="searchtags" placeholder="Recherche par mot-clef" /><input type="image" src="images/search.png#" />
+					</form>
+				</div>
+				
+				<div id="logo">
+					<a href="?">
+						<img src="images/logo.png#" alt="les liens du code" />
+					</a>
+				</div>
 
-    <div id="logo" title="Share your links !" onclick="document.location='?';"></div>
-    <div style="float:right; font-style:italic; color:#bbb; text-align:right; padding:0 5 0 0;" class="nomobile">Shaare your links...<br>
-        {if="!empty($linkcount)"}{$linkcount} links{/if}</div>
-    <span id="shaarli_title"><a href="?">{$shaarlititle|htmlspecialchars}</a></span>
-  
-{if="!empty($_GET['source']) && $_GET['source']=='bookmarklet'"}
-    {ignore} When called as a popup from bookmarklet, do not display menu. {/ignore}
-{else}
-    <a href="?" class="nomobile">Home</a>
-    {if="isLoggedIn()"}
-        <a href="?do=logout">Logout</a><a href="?do=tools">Tools</a><a href="?do=addlink"><b>Add link</b></a>
-    {elseif="$GLOBALS['config']['OPEN_SHAARLI']"}
-        <a href="?do=tools">Tools</a><a href="?do=addlink"><b>Add link</b></a>
-    {else}
-        <a href="?do=login">Login</a>
-    {/if}
-    <a href="{$feedurl}?do=rss{$searchcrits}" class="nomobile">RSS Feed</a>
-    <a href="{$feedurl}?do=atom{$searchcrits}" style="padding-left:10px;" class="nomobile">ATOM Feed</a>
-    <a href="?do=tagcloud">Tag cloud</a>
-    <a href="?do=picwall{$searchcrits}">Picture wall</a>
-    <a href="?do=daily">Daily</a>
-{/if}
-    <div class="clear"></div>
-
-
+				<nav>
+					<ul class="menu">
+						<li><a href="?"><i class="fa fa-home"></i> Accueil</a></li>
+						<li><a href="http://fabien.vauchelles.com"><i class="fa fa-user"></i> Blog</a></li>
+						<li><a href="{$feedurl}?do=rss{$searchcrits}"><i class="fa fa-rss"></i> RSS</a></li>
+						<li><a href="http://facebook.com/lesliensducode"><i class="fa fa-facebook-square"></i> Facebook</a></li>
+						<li><a href="http://twitter.com/lesliensducode"><i class="fa fa-twitter"></i> Twitter</a></li>
+                                                {if="isLoggedIn()"}
+						<li><a id="bttools"><i class="fa fa-gear"></i> Outils</a></li>
+						<li><a id="btaddlink"><i class="fa fa-plus"></i> Nouveau</a></li>
+                                                <li class="last"><a href="?do=logout" class="right"><i class="fa fa-unlock"></i> Se d&eacute;connecter</a></li>
+                                                {else}
+						<li class="last"><a id="btloginform" class="right"><i class="fa fa-lock"></i> Se connecter</a></li>
+                                                {/if}
+					</ul>
+				</nav>
+			</div>
+		</div>
+                <div id="zppheader" class="ppheader" style="display:none"></div>
+                
+                {if condition="$search_type=='fulltext'||$search_type=='tags'"}
+		<div id="count" class="ppheader">
+                {else}
+                <div id="count" class="ppheader" style="display:none">
+                {/if}
+			<div class="fixed">
+				<ul class="menu">
+                                        {if="count($links)==0"}
+                                        <li class="first">Aucun r&eacute;sultat trouv&eacute;</li>
+                                        {else}
+                                            {if="$search_type=='fulltext'"}
+                                                {if="count($links)==1"}
+					<li class="first">{$result_count} r&eacute;sultat trouv&eacute; pour {$search_crits}</li>
+                                                {else}
+                                        <li class="first">{$result_count} r&eacute;sultats trouv&eacute;s pour {$search_crits}</li>
+                                                {/if}
+                                            {elseif="$search_type=='tags'"}
+                                                {if="count($links)==1"}
+                                        <li class="first">{$result_count} r&eacute;sultat trouv&eacute;</li>
+                                                {else}
+                                        <li class="first">{$result_count} r&eacute;sultats trouv&eacute;s</li>
+                                                {/if}
+                                                {loop="search_crits"}
+					<li><a href="?removetag={$value|htmlspecialchars}"><i class="fa fa-tag"></i> {$value|htmlspecialchars}</a></li>
+                                                {/loop}
+                                            {/if}
+                                        {/if}
+				</ul>
+			</div>
+		</div>

@@ -1,26 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>{include="includes"}
-{if="empty($GLOBALS['disablejquery'])"}<script src="inc/jquery.min.js#"></script><script src="inc/jquery-ui.min.js#"></script>{/if}
-</head>
-<body onload="document.changetag.fromtag.focus();">
-<div id="pageheader">
-	{include="page.header"}
-	<form method="POST" action="" name="changetag" id="changetag">
-	<input type="hidden" name="token" value="{$token}">
-	Tag: <input type="text" name="fromtag" id="fromtag">
-	<input type="text" name="totag" style="margin-left:40px;"><input type="submit" name="renametag" value="Rename tag" class="bigbutton">
-	&nbsp;&nbsp;or&nbsp; <input type="submit" name="deletetag" value="Delete tag" class="bigbutton" onClick="return confirmDeleteTag();"><br>(Case sensitive)</form>
-<script language="JavaScript">function confirmDeleteTag() { var agree=confirm("Are you sure you want to delete this tag from all links ?"); if (agree) return true ; else return false ; }</script>
-</div>
-{include="page.footer"}
-{if="($GLOBALS['config']['OPEN_SHAARLI'] || isLoggedIn()) && empty($GLOBALS['disablejquery'])"}
-<script language="JavaScript">
-$(document).ready(function()
-{
-    $('#fromtag').autocomplete({source:'{$source}?ws=singletag',minLength:1});
-});
-</script>
-{/if}
-</body>
+    <head>
+        {include="includes"}
+    </head>
+    <body>
+        <header>
+            {include="page.header"}
+        </header>
+        
+        <section>
+                <article class="color1">
+                        <div class="fixed">
+				<form method="post" name="changetag" id="changetag">
+					<input type="hidden" name="token" value="{$token}" />
+					<input type="hidden" name="renametag" />
+		
+					<header>
+						Renommer ou supprimer un mot clef
+					</header>
+		
+					<input type="text" name="fromtag" id="fromtag" placeholder="Mot-clef source" />
+					<input type="text" name="totag" placeholder="Mot-clef destination" />
+		
+					<footer>
+						<ul class="menu">
+							<li><a onclick="submitter('#changetag','renametag');"><i class="fa fa-save"></i> Renommer</a></li>
+							<li><a onclick="if(confirmDeleteLink()){submitter('#changetag','deletetag');}"><i class="fa fa-trash-o"></i> Supprimer</a></li>
+						</ul>
+					</footer>
+				</form>
+			</div>
+		</article>
+        </section>
+        
+        <footer>
+            {include="linklist.paging"}
+            {include="page.footer"} 
+        </footer>
+
+        {include="includes2"}
+        
+        <script>
+            $( document ).ready(function()
+            {
+                $( "#fromtag").autocomplete({
+                        source: "{$source}?ws=singletag",
+                        minLength: 1,
+                        appendTo: "#autocompletechangetag"
+                });
+            });
+        </script>
+        <span id="autocompletechangetag" class="color1"></span>
+    </body>
 </html>

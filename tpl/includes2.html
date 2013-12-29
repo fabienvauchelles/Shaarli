@@ -1,0 +1,74 @@
+            <script src="inc/jquery.min.js#"></script>
+            <script src="inc/jquery-ui.min.js#"></script>
+		
+            <script>
+			$( document ).ready( function()
+			{
+                                $( "#btaddlink" ).click( function()
+                                {
+                                    togglePPheader( "?do=addlink" );
+                                });
+                                
+                                $( "#btloginform" ).click( function()
+                                {
+                                    togglePPheader( "?do=loginform" );
+                                });
+                                
+                                $( "#bttools" ).click( function()
+                                {
+                                    togglePPheader( "?do=tools" );
+                                });
+                                
+                                $( "#searchtags").autocomplete({
+                                        source: "{$source}?ws=singletag",
+                                        minLength: 1,
+                                        appendTo: "#autocompletesearchtags"
+                                });
+			});
+                        
+                        var lastlink=null;
+                        function togglePPheader( link )
+                        {
+                            var z = $( "#zppheader" );
+                            
+                            if ( z.css( "display") === 'none' )
+                            {
+                                z.load( link, function()
+                                {
+                                   z.show();
+                                   lastlink = link;
+                                });
+                            }
+                            else
+                            {
+                                if ( lastlink === null || lastlink=== link)
+                                {
+                                    z.hide();
+                                    lastlink = null;
+                                }
+                                else
+                                {
+                                    z.load( link, function()
+                                    {
+                                       z.show(); 
+                                       lastlink = link;
+                                    });
+                                }
+                            }
+                        }
+                        
+                        function submitter( formid, newkey )
+                        {
+                            var form = $( formid );
+                            form.append( "<input type=\"hidden\" name=\""+newkey+"\" value=\"" + newkey + "\" />" );
+                            form.submit();
+                        }
+			
+			function confirmDeleteLink()
+			{
+                            return confirm( "Confirmez-vous la suppression de ce lien ?" ); 
+			}
+		</script>
+                
+                <span id="autocompletesearchtags" class="autocompletesearchtags"></span>
+                
