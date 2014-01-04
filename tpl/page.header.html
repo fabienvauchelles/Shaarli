@@ -1,67 +1,236 @@
-                <div id="navigable">
-			<div class="fixed">
-				<div id="search">
-					<form method="GET" name="searchform" class="first">
-                                                {if="!empty($linkcount)"}<input type="text" name="searchterm" placeholder="Recherche parmi {$linkcount} liens" />{else}<input type="text" name="searchterm" placeholder="Recherche parmi les liens" />{/if}<input type="image" src="images/search.png#" />
-					</form>
-					<form method="GET" name="tagfilter">
-						<input type="text" name="searchtags" id="searchtags" placeholder="Recherche par mot-clef" /><input type="image" src="images/search.png#" />
-					</form>
-				</div>
+                        <tr id="header-logo">
+				<!-- HEADER LOGO -->
 				
-				<div id="logo">
-					<a href="?">
-						<img src="images/logo.png#" alt="les liens du code" />
-					</a>
-				</div>
+				<td>&nbsp;</td>
+				
+				<td class="fixed">
+					<table class="full">
+						<tr>
+							<td class="left">
+								<!-- LOGO -->
+								
+								<a href="?">
+									<img src="images/logo.png#" alt="les liens du code" />
+								</a>
+							</td>
+							
+							<td class="right">
+								<!-- SEARCH TERM -->
+								
+								<form method="GET" name="searchform">
+									{if="!empty($linkcount)"}<input class="medium" type="text" name="searchterm" placeholder="Recherche parmi {$linkcount} liens" />{else}<input class="medium" type="text" name="searchterm" placeholder="Recherche parmi les liens" />{/if}<input class="button" type="image" src="images/search.png#" />
+								</form>
+							</td>
+							
+							<td class="right">
+								<!-- SEARCH TAG -->
+								
+								<form method="GET" name="tagfilter">
+									<input class="medium" type="text" id="searchtags" name="searchtags" placeholder="Recherche par mot-clef" /><input class="button" type="image" src="images/search.png#" />
+								</form>
+							</td>
+						</tr>
+					</table>
+				</td>
+				
+				<td>&nbsp;</td>
+			</tr>
+			
+			<tr id="header-menu">
+				<!-- HEADER MENU -->
+				
+				<td>&nbsp;</td>
+				
+				<td class="fixed menu">
+					<table class="full">
+						<tr>
+							<td class="left">
+								<!-- ACCUEIL -->
+                                                                
+                                                                <table>
+                                                                        <tr>
+                                                                                <th><img src="images/bthome.png#" /></th>
+                                                                                <td><a href="?">ACCUEIL</a></td>
+                                                                        </tr>
+                                                                </table>
+							</td>
 
-				<nav>
-					<ul class="menu">
-						<li><a href="?"><i class="fa fa-home"></i> Accueil</a></li>
-						<li><a href="http://fabien.vauchelles.com"><i class="fa fa-user"></i> Blog</a></li>
-						<li><a href="{$feedurl}?do=rss{$searchcrits}"><i class="fa fa-rss"></i> RSS</a></li>
-						<li><a href="http://facebook.com/lesliensducode"><i class="fa fa-facebook-square"></i> Facebook</a></li>
-						<li><a href="http://twitter.com/lesliensducode"><i class="fa fa-twitter"></i> Twitter</a></li>
-                                                {if="isLoggedIn()"}
-						<li><a id="bttools"><i class="fa fa-gear"></i> Outils</a></li>
-						<li><a id="btaddlink"><i class="fa fa-plus"></i> Nouveau</a></li>
-                                                <li class="last"><a href="?do=logout" class="right"><i class="fa fa-unlock"></i> Se d&eacute;connecter</a></li>
-                                                {else}
-						<li class="last"><a id="btloginform" class="right"><i class="fa fa-lock"></i> Se connecter</a></li>
-                                                {/if}
-					</ul>
-				</nav>
-			</div>
-		</div>
-                <div id="zppheader" class="ppheader" style="display:none"></div>
-                
-                {if condition="$search_type=='fulltext'||$search_type=='tags'"}
-		<div id="count" class="ppheader">
-                {else}
-                <div id="count" class="ppheader" style="display:none">
-                {/if}
-			<div class="fixed">
-				<ul class="menu">
-                                        {if="count($links)==0"}
-                                        <li class="first">Aucun r&eacute;sultat trouv&eacute;</li>
-                                        {else}
-                                            {if="$search_type=='fulltext'"}
-                                                {if="count($links)==1"}
-					<li class="first">{$result_count} r&eacute;sultat trouv&eacute; pour {$search_crits}</li>
-                                                {else}
-                                        <li class="first">{$result_count} r&eacute;sultats trouv&eacute;s pour {$search_crits}</li>
-                                                {/if}
-                                            {elseif="$search_type=='tags'"}
-                                                {if="count($links)==1"}
-                                        <li class="first">{$result_count} r&eacute;sultat trouv&eacute;</li>
-                                                {else}
-                                        <li class="first">{$result_count} r&eacute;sultats trouv&eacute;s</li>
-                                                {/if}
-                                                {loop="search_crits"}
-					<li><a href="?removetag={$value|htmlspecialchars}"><i class="fa fa-tag"></i> {$value|htmlspecialchars}</a></li>
-                                                {/loop}
-                                            {/if}
-                                        {/if}
-				</ul>
-			</div>
-		</div>
+							<td class="left">
+								<!-- BLOG -->
+								
+                                                                <table>
+                                                                        <tr>
+                                                                                <th><img src="images/btblog.png#" /></th>
+                                                                                <td><a href="http://fabien.vauchelles.com">BLOG</a></td>
+                                                                        </tr>
+                                                                </table>
+							</td>
+
+							<td class="left">
+								<!-- RSS -->
+							
+                                                                <table>
+                                                                        <tr>
+                                                                                <th><img src="images/btrss.png#" /></th>
+                                                                                <td><a href="{$feedurl}?do=rss{$searchcrits}">RSS</a></td>
+                                                                        </tr>
+                                                                </table>
+								
+							</td>
+							
+							<td class="left">
+								<!-- FACEBOOK -->
+							
+                                                                <table>
+                                                                        <tr>
+                                                                                <th><img src="images/btfacebook.png#" /></th>
+                                                                                <td><a href="http://facebook.com/lesliensducode">FACEBOOK</a></td>
+                                                                        </tr>
+                                                                </table>
+							</td>
+							
+							<td class="left">
+								<!-- TWITTER -->
+							
+                                                                <table>
+                                                                        <tr>
+                                                                                <th><img src="images/bttwitter.png#" /></th>
+                                                                                <td><a href="http://twitter.com/lesliensducode">TWITTER</a></td>
+                                                                        </tr>
+                                                                </table>
+								
+							</td>
+							
+                                                        {if="isLoggedIn()"}
+							<td class="left">
+								<!-- TOOLS -->
+							
+                                                                <table>
+                                                                        <tr>
+                                                                                <th><img src="images/bttools.png#" /></th>
+                                                                                <td><a onclick="togglePPheader('?do=tools'); return false;" href="#">OUTILS</a></td>
+                                                                        </tr>
+                                                                </table>
+							</td>
+							
+							<td class="left">
+								<!-- ADD -->
+							
+                                                                <table>
+                                                                        <tr>
+                                                                                <th><img src="images/btadd.png#" /></th>
+                                                                                <td><a onclick="togglePPheader('?do=addlink'); return false;" href="#">NOUVEAU</a></td>
+                                                                        </tr>
+                                                                </table>
+							</td>
+							
+							<td class="separator">&nbsp;</td>
+							
+							<td>
+								<!-- DISCONNECT -->
+							
+                                                                <table>
+                                                                        <tr>
+                                                                                <th><img src="images/btdisconnect.png#" /></th>
+                                                                                <td><a href="?do=logout">SE&nbsp;D&Eacute;CONNECTER</a></td>
+                                                                        </tr>
+                                                                </table>
+							</td>
+                                                        {else}
+                                                        <td class="separator">&nbsp;</td>
+							
+							<td>
+								<!-- CONNECT -->
+							
+                                                                <table>
+                                                                        <tr>
+                                                                                <th><img src="images/btconnect.png#" /></th>
+                                                                                <td><a onclick="togglePPheader('?do=loginform'); return false;" href="#">SE&nbsp;CONNECTER</a></td>
+                                                                        </tr>
+                                                                </table>
+							</td>
+                                                        {/if}
+						</tr>
+					</table>
+				</td>
+				
+				<td>&nbsp;</td>
+			</tr>
+			
+			<tr id="header-separator">
+				<!-- HEADER SEPARATOR -->
+				
+				<td></td>
+				
+				<td class="fixed"></td>
+				
+				<td></td>
+			</tr>
+			
+                        {if condition="$search_type=='fulltext'||$search_type=='tags'"}
+			<tr id="header-submenu">
+                        {else}
+                        <tr id="header-submenu" style="display:none">
+                        {/if}
+				<!-- HEADER SUBMENU : RESULTS -->
+				
+				<td>&nbsp;</td>
+
+				<td class="fixed menu">
+					<table class="full">
+						<tr>
+                                                        {if="count($links)==0"}
+                                                        <td class="left">
+								<!-- RESULTS COUNT -->
+                                                                Aucun&nbsp;r&eacute;sultat&nbsp;trouv&eacute;
+                                                                <script>var lastlink=null;</script>
+							</td>
+                                                        {else}
+                                                                <script>var lastlink='search';</script>
+                                                            {if="$search_type=='fulltext'"}
+                                                                {if="count($links)==1"}
+                                                        <td class="left">
+								<!-- RESULTS COUNT -->
+                                                                1&nbsp;r&eacute;sultat&nbsp;trouv&eacute;&nbsp;pour&nbsp;{$search_crits}
+							</td>
+                                                                {else}
+                                                        <td class="left">
+								<!-- RESULTS COUNT -->
+                                                                {$result_count}&nbsp;r&eacute;sultats&nbsp;trouv&eacute;s&nbsp;pour&nbsp;{$search_crits}
+							</td>
+                                                                {/if}
+                                                            {elseif="$search_type=='tags'"}
+                                                                {if="count($links)==1"}
+                                                        <td class="left">
+								<!-- RESULTS COUNT -->
+                                                                1&nbsp;r&eacute;sultat&nbsp;trouv&eacute;
+							</td>
+                                                                {else}
+                                                        <td class="left">
+								<!-- RESULTS COUNT -->
+                                                                {$result_count}&nbsp;r&eacute;sultats&nbsp;trouv&eacute;s
+							</td>
+                                                                {/if}
+                                                                {loop="search_crits"}
+                                                        <td class="left">
+								<!-- TAG -->
+                                                                
+                                                                <table>
+                                                                        <tr>
+                                                                                <th><img src="images/bttag.png#" /></th>
+                                                                                <td><a href="?removetag={$value|htmlspecialchars}">{function="htmlspecialchars(mb_strtoupper($value,'UTF-8'))"}</a></td>
+                                                                        </tr>
+                                                                </table>
+							</td>
+                                                                {/loop}
+                                                            {/if}
+                                                        {/if}
+
+							<td class="separator">&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				
+				<td>&nbsp;</td>
+			</tr>
+                        

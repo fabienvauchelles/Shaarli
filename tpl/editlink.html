@@ -4,53 +4,108 @@
         {include="includes"}
     </head>
     <body>
-        <header>
+        <table class="full">
             {include="page.header"}
-        </header>
         
-        <section>
-                <article class="color1">
-                        <div class="fixed">
-				<form method="post" name="linkform" id="linkform">
-					<input type="hidden" name="token" value="{$token}" />
-                                        <input type="hidden" name="lf_linkdate" value="{$link.linkdate}">
-					{if condition="$http_referer"}<input type="hidden" name="returnurl" value="{$http_referer|htmlspecialchars}">{/if}
+                        <tr class="article1">
+				<!-- EDIT LINK -->
+				
+				<td>&nbsp;</td>
+				
+				<td class="fixed">
+					<form method="post" id="linkform" name="linkform">
+                                                <input type="hidden" name="token" value="{$token}" />
+                                                <input type="hidden" name="lf_linkdate" value="{$link.linkdate}">
+                                                {if condition="$http_referer"}<input type="hidden" name="returnurl" value="{$http_referer|htmlspecialchars}">{/if}
 					
-					<header>
-						Ajouter, &eacute;diter ou supprimer un lien
-					</header>
-				
-					<input type="text" name="lf_url" value="{$link.url|htmlspecialchars}" placeholder="URL" />
-					<input type="text" name="lf_title" value="{$link.title|htmlspecialchars}" placeholder="Titre" />
-				
-					<textarea name="lf_description" rows="10" cols="25" placeholder="Description" />{$link.description|htmlspecialchars}</textarea>
+						<table class="full">
+							<tr>
+								<td class="article-title">
+									<!-- TITLE -->
+									
+									Ajouter, &eacute;diter ou supprimer un lien
+								</td>
+							</tr>
+							<tr>
+								<td class="article-content">
+									<table class="full">
+										<tr>
+											<td>
+												<!-- URL -->
+												
+												<input class="article-input" type="text" name="lf_url" value="{$link.url|htmlspecialchars}" placeholder="URL" />
+											</td>
+										</tr>
+										
+										<tr>
+											<td>
+												<!-- TITLE -->
+												
+												<input class="article-input" type="text" name="lf_title" value="{$link.title|htmlspecialchars}" placeholder="Titre" />
+											</td>
+										</tr>
+										
+										<tr>
+											<td>
+												<!-- DESCRIPTION -->
+												
+                                                                                                <textarea class="article-input" name="lf_description" rows="10" cols="25" placeholder="Description" />{$link.description|htmlspecialchars}</textarea>
+											</td>
+										</tr>
+										
+										<tr>
+											<td>
+												<!-- TAGS -->
 
-					<input type="text" id="lf_tags" name="lf_tags" value="{$link.tags|htmlspecialchars}" placeholder="Mots-clefs (s&eacute;par&eacute;s par une virgule)" />
-                                        
-                                        {if condition="($link_is_new && $GLOBALS['privateLinkByDefault']==true) || $link.private == true"}
-                                        <input type="checkbox" name="lf_private" id="lf_private" checked />
-                                        {else}
-                                        <input type="checkbox" name="lf_private" id="lf_private" />
-                                        {/if}
-                                        <label for="lf_private" /><i>Priv&eacute;</i></label>
-					
-					<footer>
-						<ul class="menu">
-							<li><a onclick="submitter('#linkform','save_edit');"><i class="fa fa-save"></i> Enregistrer</a></li>
-                                                        {if condition="!$link_is_new"}
-                                                        <li><a onclick="if(confirmDeleteLink()){submitter('#linkform','delete_link');}"><i class="fa fa-trash-o"></i> Supprimer</a></li>
-                                                        {/if}
-						</ul>
-					</footer>
-				</form>
-			</div>
-		</article>
-        </section>
-        
-        <footer>
-            {include="linklist.paging"}
+                                                                                                <input class="article-input" type="text" id="lf_tags" name="lf_tags" value="{$link.tags|htmlspecialchars}" placeholder="Mots-clefs (s&eacute;par&eacute;s par un espace)" />
+											</td>
+										</tr>
+										
+										<tr>
+											<td>
+												<!-- PRIVATE -->
+
+                                                                                                {if condition="($link_is_new && $GLOBALS['privateLinkByDefault']==true) || $link.private == true"}
+                                                                                                <input type="checkbox" name="lf_private" id="lf_private" checked />
+                                                                                                {else}
+                                                                                                <input type="checkbox" name="lf_private" id="lf_private" />
+                                                                                                {/if}
+                                                                                                <label for="lf_private" /><i>Priv&eacute;</i></label>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="article-footer single">
+									<!-- SAVE -->
+                                                                        <table class="cmd">
+                                                                                <tr>
+                                                                                        <th><img src="images/save1.png#" /></th>
+                                                                                        <td><a onclick="submitter('#linkform','save_edit'); return false;" href="#">ENREGISTRER</a></td>
+                                                                                </tr>
+                                                                        </table>
+									
+                                                                        {if condition="!$link_is_new"}
+									<!-- DELETE -->
+                                                                        <table class="cmd">
+                                                                                <tr>
+                                                                                        <th><img src="images/delete1.png#" /></th>
+                                                                                        <td><a onclick="if(confirmDeleteLink()){submitter('#linkform','delete_link');}; return false;" href="#">SUPPRIMER</a></td>
+                                                                                </tr>
+                                                                        </table>
+                                                                        {/if}
+								</td>
+							</tr>
+						</table>
+					</form>
+				</td>
+				
+				<td>&nbsp;</td>
+			</tr>
+            
             {include="page.footer"} 
-        </footer>
+        </table>
 
         {include="includes2"}
         
@@ -64,6 +119,6 @@
                 });
             });
         </script>
-        <span id="autocompleteeditlink" class="color1"></span>
+        <span id="autocompleteeditlink" class="article1"></span>
     </body>
 </html>

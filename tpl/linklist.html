@@ -4,67 +4,117 @@
         {include="includes"}
     </head>
     <body>
-        <header>
+        <table class="full">
             {include="page.header"}
-        </header>
-        
-        <section>
-            {if="count($links)==0"}
-            <article class="color1">
-                <header></header>
-                <footer></footer>
-            </article>
-            {else}
-                {loop="links"}
-            <article class="{$value.class}">
-                <div class="fixed">
-				<header>
-                                        <a name="{$value.linkdate|smallHash}" id="{$value.linkdate|smallHash}"></a>
-					<a href="{$redirector}{$value.url|htmlspecialchars}">{$value.title|htmlspecialchars}</a>
-				</header>
+            
+            {loop="links"}
+
+                            <tr class="article{$value.class}">
 				
-                                <p>
-                                {$value.url|thumbnail}
-                                {if="$value.description"}{$value.description}{/if}
-                                <p>
+				<td>&nbsp;</td>
 				
-				<footer>
-					<ul class="menu">
-						<li class="first"><i class="fa fa-calendar"></i> {$value.localdate|htmlspecialchars}</li>
-                                                {if="$value.private"}
-                                                <li class="first"><i class="fa fa-lock"></i> priv&eacute;</li>
-                                                {/if}
-						<li><a href="?{$value.linkdate|smallHash}"><i class="fa fa-link"></i> lien permanent</a></li>
-                                                {if="isLoggedIn()"}
-						<li><a href="?edit_link={$value.linkdate}"><i class="fa fa-edit"></i> Editer</a></li>
-						<li>
-							<form method="POST">
-								<input type="hidden" name="lf_linkdate" value="{$value.linkdate}">
-								<input type="hidden" name="token" value="{$token}">
-								<input type="hidden" name="delete_link">
-								<a onclick="if(confirmDeleteLink()){submit()};"><i class="fa fa-trash-o"></i> Supprimer</a>
-							</form>
-						</li>
-                                                {/if}
-                                        </ul>
-                                        <ul class="menu">
+				<td class="fixed">
+					<table class="full">
+						<tr>
+							<td class="article-title">
+                                                                <a name="{$value.linkdate|smallHash}" id="{$value.linkdate|smallHash}"></a>
+								
+								<!-- TITLE -->
+                                                                <a href="{$redirector}{$value.url|htmlspecialchars}">{$value.title|htmlspecialchars}</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="article-content">
+                                                                <!-- CONTENT -->
+                                                                <span class="image">{$value.url|thumbnail}</span>
+{if="$value.description"}{$value.description}{/if}
+							</td>
+						</tr>
+						<tr>
+                                                        {if="$value.tags"}
+							<td class="article-footer double1">
+                                                        {else}
+                                                        <td class="article-footer single">
+                                                        {/if}
+								<!-- DATE -->
+								<table class="cmd">
+									<tr>
+										<th><img src="images/calendar{$value.class}.png#" /></th>
+										<td>{$value.localdate|htmlspecialchars}</td>
+									</tr>
+								</table>
+
+								<!-- PRIVATE -->
+                                                                {if="$value.private"}
+								<table class="cmd">
+									<tr>
+										<th><img src="images/private{$value.class}.png#" /></th>
+										<td>Priv&eacute;</td>
+									</tr>
+								</table>
+                                                                {/if}
+	
+								<!-- PERMALINK -->
+                                                                <table class="cmd">
+                                                                        <tr>
+                                                                                <th><img src="images/permalink{$value.class}.png#" /></th>
+                                                                                <td><a href="?{$value.linkdate|smallHash}">LIEN&nbsp;PERMANENT</a></td>
+                                                                        </tr>
+                                                                </table>
+                                                               
+                                                                 {if="isLoggedIn()"}
+								<!-- EDIT -->
+                                                                <table class="cmd">
+                                                                        <tr>
+                                                                                <th><img src="images/edit{$value.class}.png#" /></th>
+                                                                                <td><a href="?edit_link={$value.linkdate}">&Eacute;DITER</a></td>
+                                                                        </tr>
+                                                                </table>
+
+								<!-- DELETE -->
+								<form method="post" id="delete{$value.linkdate}">
+									<input type="hidden" name="lf_linkdate" value="{$value.linkdate}">
+									<input type="hidden" name="token" value="{$token}">
+									<input type="hidden" name="delete_link">
+							
+                                                                        <table class="cmd">
+                                                                                <tr>
+                                                                                        <th><img src="images/delete{$value.class}.png#" /></th>
+                                                                                        <td><a onclick="if(confirmDeleteLink()){submitterSimple('#delete{$value.linkdate}');}; return false;" href="#">SUPPRIMER</a></td>
+                                                                                </tr>
+                                                                        </table>
+								</form>
+                                                                {/if}
+							</td>
+						</tr>
+                                                
                                                 {if="$value.tags"}
-                                                    {loop="value.taglist"}
-						<li><a href="?addtag={$value|urlencode}"><i class="fa fa-tag"></i> {$value|htmlspecialchars}</a></li>
-                                                    {/loop}
+						<tr>
+							<td class="article-footer double2">
+                                                                {loop="value.taglist "}
+								<!-- TAG -->
+                                                                <table class="cmd">
+                                                                        <tr>
+                                                                                <th><img src="images/tag{$value1.class}.png#" /></th>
+                                                                                <td><a href="?addtag={$value|urlencode}">{function="htmlspecialchars(mb_strtoupper($value,'UTF-8'))"}</a></td>
+                                                                        </tr>
+                                                                </table>
+                                                                {/loop}
+							</td>
+						</tr>
                                                 {/if}
-					</ul>
-				</footer>
-                </div>
-            </article>
-                {/loop}
-            {/if}
-        </section>
-        
-        <footer>
+					</table>
+				</td>
+				
+				<td>&nbsp;</td>
+			</tr>
+            
+            {/loop}
+            
             {include="linklist.paging"}
+            
             {include="page.footer"} 
-        </footer>
+        </table>
 
         {include="includes2"}
     </body>

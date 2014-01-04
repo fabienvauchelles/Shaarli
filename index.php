@@ -1497,6 +1497,7 @@ function renderPage()
     // -------- User clicked the "Delete" button when editing a link : Delete link from database.
     if (isset($_POST['delete_link']))
     {
+        echo 'ok';
         if (!tokenOk($_POST['token'])) die('Wrong token.');
         // We do not need to ask for confirmation:
         // - confirmation is handled by javascript
@@ -1764,7 +1765,7 @@ function buildLinkList($PAGE,$LINKSDB)
     if (isset($_GET['searchterm'])) // Fulltext search
     {
         $linksToDisplay = $LINKSDB->filterFulltext(trim($_GET['searchterm']));
-        $search_crits=htmlspecialchars(trim($_GET['searchterm']));
+        $search_crits=  str_replace(' ', '&nbsp;', htmlspecialchars(trim($_GET['searchterm'])));
         $search_type='fulltext';
     }
     elseif (isset($_GET['searchtags'])) // Search by tag
@@ -1823,7 +1824,7 @@ function buildLinkList($PAGE,$LINKSDB)
         $link = $linksToDisplay[$keys[$i]];
         $link['description']=nl2br(keepMultipleSpaces(text2clickable(htmlspecialchars($link['description']))));
         $title=$link['title'];
-        $link['class'] = 'color' . ($i % 4 + 1);
+        $link['class'] = ($i % 4 + 1);
         $link['localdate']=linkdate2locale($link['linkdate']);
         $taglist = explode(' ',$link['tags']);
         uasort($taglist, 'strcasecmp');

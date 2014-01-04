@@ -1,14 +1,33 @@
-                        <div class="fixed">
+				<!-- HEADER SUBMENU : LOGIN -->
+				
+				<td>&nbsp;</td>
+				
                                 {if="!ban_canLogin()"}
-                                <ul class="menu">
-                                    <li>Vous avez &eacute;t&eacute; banni apr&egrave;s trop d'essai.</li>
-                                </ul>
+                                <td class="fixed menu">
+                                        <table class="full">
+                                                <tr>
+                                                        <td class="left">
+                                                                Vous avez &eacute;t&eacute; banni apr&egrave;s trop d'essai.
+                                                        </td>
+                                                </tr>
+                                        </table>
+                                </td>    
                                 {else}
-				<form class="right" method="post" name="loginform" id="loginform">
-					<input type="hidden" name="token" value="{$token}">
-                                        {if="$returnurl"}<input type="hidden" name="returnurl" value="{$returnurl|htmlspecialchars}">{/if}
-					<input type="checkbox" name="longlastingsession" id="longlastingsession" />
-					<label class="vborder" for="longlastingsession">Rester connect&eacute;</label><input class="vborder" type="text" name="login" placeholder="Nom d'utilisateur" /><input type="password" name="password" placeholder="Mot de passe" /><input type="image" src="images/login.png#" />
-				</form>
+                                <td class="fixed">
+					<table>
+						<tr>
+							<td class="separator">&nbsp;</td>
+							<td>
+								<form method="post" name="loginform" id="loginform">
+									<input type="hidden" name="token" value="{$token}">
+                                                                        {if="$returnurl"}<input type="hidden" name="returnurl" value="{$returnurl|htmlspecialchars}">{/if}
+									<input class="cb" type="checkbox" name="longlastingsession" id="longlastingsession" /><label for="longlastingsession">Rester connect&eacute;</label><input class="medium vborder" type="text" name="login" placeholder="Nom d'utilisateur" /><input class="medium vborder" type="password" name="password" placeholder="Mot de passe" /><input class="button" type="image" src="images/login.png#" />
+								</form>
+							</td>
+						</tr>
+					</table>
+				</td>
                                 {/if}
-			</div>
+				
+				<td>&nbsp;</td>
+				

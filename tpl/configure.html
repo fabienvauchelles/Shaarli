@@ -4,57 +4,95 @@
         {include="includes"}
     </head>
     <body>
-        <header>
-            {include="page.header"}
-        </header>
-        
         {$timezone_js}
         
-        <section>
-                <article class="color1">
-                        <div class="fixed">
-				<form method="post" name="configform">
-					<input type="hidden" name="token" value="{$token}" />
-		
-					<header>
-						Configurer Shaarli
-					</header>
-		
-					<input type="text" name="title" value="{$title}" placeholder="Titre de la page" />
-					
-					<div class="label-select">{$timezone_form}</div>
+        <table class="full">
+            {include="page.header"}
 
-					<input type="text" name="redirector" value="{$redirector}" placeholder="http://anonym.to/?</i> masquera le HTTP_REFERER)" />
-					
-					<div>
-						<input type="checkbox" name="disablesessionprotection" id="disablesessionprotection" {if="!empty($GLOBALS['disablesessionprotection'])"}checked{/if} />
-						<label for="disablesessionprotection">D&eacute;sactive la protection contre le piratage de cookie de session</label>
-					</div>
-					
-					<div>
-						<input type="checkbox" name="disablejquery" id="disablejquery" {if="!empty($GLOBALS['disablejquery'])"}checked{/if} />
-						<label for="disablejquery">D&eacute;sactive jQuery</label>
-					</div>
-					
-					<div>
-						<input type="checkbox" name="privateLinkByDefault" id="privateLinkByDefault" {if="!empty($GLOBALS['privateLinkByDefault'])"}checked{/if} />
-						<label for="privateLinkByDefault">Par d&eacute;fault, tous les liens sont priv&eacute;s</label>
-					</div>
+                        <tr class="article4">
+				<!-- CONFIG SHAARLI -->
+				
+				<td>&nbsp;</td>
+				
+				<td class="fixed">
+					<form method="post" id="configform" name="configform">
+                                                <input type="hidden" name="token" value="{$token}" />
+                                                
+						<table class="full">
+							<tr>
+								<td class="article-title">
+									<!-- TITLE -->
+									Configurer Shaarli
+								</td>
+							</tr>
+							<tr>
+								<td class="article-content">
+									<table class="full">
+										<tr>
+											<td>
+												<!-- PAGE TITLE -->
 
-					<footer>
-						<ul class="menu">
-							<li><a onclick="submit();"><i class="fa fa-save"></i> Enregistrer</a></form></li>
-						</ul>
-					</footer>
-				</form>
-			</div>
-		</article>
-        </section>
+												<input class="article-input" type="text" name="title" value="{$title}" placeholder="Titre de la page" />
+											</td>
+										</tr>
+										<tr>
+											<!-- LOCALE -->
+                                                                                        <td class="label-select">{$timezone_form}</td>
+										</tr>
+										<tr>
+											<td>
+												<!-- REDIRECTOR -->
+												
+												<input class="article-input"  type="text" name="redirector" value="{$redirector}" placeholder="http://anonym.to/?</i> masquera le HTTP_REFERER)" />
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<!-- SESSION PROTECTION -->
+												
+                                                                                                <input type="checkbox" name="disablesessionprotection" id="disablesessionprotection" {if="!empty($GLOBALS['disablesessionprotection'])"}checked{/if} />
+                                                                                                <label for="disablesessionprotection">D&eacute;sactive la protection contre le piratage de cookie de session</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<!-- DISABLE JQUERY -->
+												
+												<input type="checkbox" name="disablejquery" id="disablejquery" {if="!empty($GLOBALS['disablejquery'])"}checked{/if} />
+                                                                                                <label for="disablejquery">D&eacute;sactive jQuery</label>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<!-- PRIVATE LINKS BY DEFAULT ? -->
+												
+												<input type="checkbox" name="privateLinkByDefault" id="privateLinkByDefault" {if="!empty($GLOBALS['privateLinkByDefault'])"}checked{/if} />
+                                                                                                <label for="privateLinkByDefault">Par d&eacute;fault, tous les liens sont priv&eacute;s</label>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="article-footer single">
+									<!-- SAVE -->
+                                                                        <table class="cmd">
+                                                                                <tr>
+                                                                                        <th><img src="images/save4.png#" /></th>
+                                                                                        <td><a onclick="submitterSimple('#configform'); return false;" href="#">ENREGISTRER</a></td>
+                                                                                </tr>
+                                                                        </table>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</td>
+				
+				<td>&nbsp;</td>
+			</tr>
         
-        <footer>
-            {include="linklist.paging"}
-            {include="page.footer"} 
-        </footer>
+                {include="page.footer"} 
+        </table>
 
         {include="includes2"}
     </body>

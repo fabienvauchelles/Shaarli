@@ -4,40 +4,75 @@
         {include="includes"}
     </head>
     <body>
-        <header>
+        <table class="full">
             {include="page.header"}
-        </header>
         
-        <section>
-                <article class="color1">
-                        <div class="fixed">
-				<form method="post" name="changetag" id="changetag">
-					<input type="hidden" name="token" value="{$token}" />
-					<input type="hidden" name="renametag" />
-		
-					<header>
-						Renommer ou supprimer un mot clef
-					</header>
-		
-					<input type="text" name="fromtag" id="fromtag" placeholder="Mot-clef source" />
-					<input type="text" name="totag" placeholder="Mot-clef destination" />
-		
-					<footer>
-						<ul class="menu">
-							<li><a onclick="submitter('#changetag','renametag');"><i class="fa fa-save"></i> Renommer</a></li>
-							<li><a onclick="if(confirmDeleteLink()){submitter('#changetag','deletetag');}"><i class="fa fa-trash-o"></i> Supprimer</a></li>
-						</ul>
-					</footer>
-				</form>
-			</div>
-		</article>
-        </section>
+                        <tr class="article2">
+				<!-- RENAME TAG -->
+				
+				<td>&nbsp;</td>
+				
+				<td class="fixed">
+					<form method="post" id="changetag" name="changetag">
+						<input type="hidden" name="token" value="{$token}" />
+						
+						<table class="full">
+							<tr>
+								<td class="article-title">
+									<!-- TITLE -->
+									
+									Renommer ou supprimer un mot clef
+								</td>
+							</tr>
+							<tr>
+								<td class="article-content">
+									<table class="full">
+										<tr>
+											<td>
+												<!-- FROM TAG -->
+												
+												<input class="article-input" type="text" name="fromtag" id="fromtag" placeholder="Mot-clef source" />
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<!-- TO TAG -->
+												
+												<input class="article-input" type="text" name="totag" placeholder="Mot-clef destination" />
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="article-footer single">
+									<!-- SAVE -->
+                                                                        <table class="cmd">
+                                                                                <tr>
+                                                                                        <th><img src="images/save2.png#" /></th>
+                                                                                        <td><a onclick="submitter('#changetag','renametag'); return false;" href="#">RENOMMER</a></td>
+                                                                                </tr>
+                                                                        </table>
+									
+									<!-- DELETE -->
+                                                                        <table class="cmd">
+                                                                                <tr>
+                                                                                        <th><img src="images/delete2.png#" /></th>
+                                                                                        <td><a onclick="if(confirmDeleteLink()){submitter('#changetag','deletetag');}; return false;" href="#">SUPPRIMER</a></td>
+                                                                                </tr>
+                                                                        </table>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</td>
+				
+				<td>&nbsp;</td>
+			</tr>
         
-        <footer>
-            {include="linklist.paging"}
             {include="page.footer"} 
-        </footer>
-
+        </table>
+        
         {include="includes2"}
         
         <script>
@@ -50,6 +85,6 @@
                 });
             });
         </script>
-        <span id="autocompletechangetag" class="color1"></span>
+        <span id="autocompletechangetag" class="article2"></span>
     </body>
 </html>
