@@ -11,3 +11,6 @@ pagecache
 
 # Netbeans project files
 nbproject/
+
+# Google webmaster index
+google*.html
