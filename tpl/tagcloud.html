@@ -1,15 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>{include="includes"}</head>
-<body>
-	<div id="pageheader">{include="page.header"}</div>
-<center>
-<div id="cloudtag">
-    {loop="tags"}
-    <span style="color:#99f; font-size:9pt; padding-left:5px; padding-right:2px;">{$value.count}</span><a href="?searchtags={$key|htmlspecialchars}" style="font-size:{$value.size}pt; font-weight:bold; color:black; text-decoration:none">{$key|htmlspecialchars}</a>
-    {/loop}
-</div>
-</center>
-{include="page.footer"}
-</body>
+    <head>
+        {include="includes"}
+    </head>
+    <body>
+        <table class="full">
+            {include="page.header"}
+            
+            <tr class="article4">
+                             <!-- TAGS -->
+
+                             <td>&nbsp;</td>
+
+                             <td class="fixed">
+                                     <table class="full">
+                                             <tr>
+                                                     <td class="article-title">
+                                                             <!-- TITLE -->
+                                                             Mots-clefs
+                                                     </td>
+                                             </tr>
+                                             <tr>
+                                                     <td class="article-content">&nbsp;</td>
+                                                     </td>
+                                             </tr>
+                                             <tr>
+                                                     <td class="article-footer single">
+                                                            {loop="tags"}
+                                                            <!-- TAG -->
+                                                             
+                                                            <table class="cmd">
+                                                                    <tr>
+                                                                            <th><img src="images/tag4.png#" /></th>
+                                                                            <td><a href="?searchtags={$key|htmlspecialchars}"><span class="tag">{function="htmlspecialchars(mb_strtoupper($key,'UTF-8'))"}</span> (<span class="count">{$value.count}</span>)</a></td>
+                                                                    </tr>
+                                                            </table>
+                                                            
+                                                            {/loop}
+                                                     </td>
+                                             </tr>
+                                     </table>
+                             </td>
+
+                             <td>&nbsp;</td>
+                     </tr> 
+                     
+            {include="page.footer"} 
+        </table>
+
+        {include="includes2"}
+    </body>
 </html>
