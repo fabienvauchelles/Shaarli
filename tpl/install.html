@@ -4,43 +4,80 @@
         {include="includes"}
     </head>
     <body>
-        <header>
-            {include="page.header"}
-        </header>
-        
         {$timezone_js}
         
-        <section>
-                <article class="color1">
-			<div class="fixed">
-				<form method="post" name="installform">
-					<input type="hidden" name="token" value="{$token}" />
-		
-					<header>
-						Installer Shaarli
-					</header>
-		
-					<input type="text" name="setlogin" placeholder="Nom d'utilisateur" />
-					<input type="password" name="setpassword" placeholder="Mot de passe" />
-		
-                                        <div class="label-select">{$timezone_html}</div>
-                                        
-                                        <input type="text" name="title" placeholder="Titre de la page" />
-                                        
-					<footer>
-						<ul class="menu">
-							<li><a onclick="submit();"><i class="fa fa-save"></i> Enregistrer</a></form></li>
-						</ul>
-					</footer>
-				</form>
-			</div>
-		</article>
-        </section>
+        <table class="full">
+            {include="page.header"}
         
-        <footer>
-            {include="linklist.paging"}
+                            <tr class="article3">
+				<!-- INSTALL SHAARLI -->
+				
+				<td>&nbsp;</td>
+				
+				<td class="fixed">
+					<form method="post" id="installform" name="installform">
+                                                <input type="hidden" name="token" value="{$token}" />
+                                                
+						<table class="full">
+							<tr>
+								<td class="article-title">
+									<!-- TITLE -->
+									Installer Shaarli
+								</td>
+							</tr>
+							<tr>
+								<td class="article-content">
+									<table class="full">
+                                                                                <tr>
+											<td>
+												<!-- LOGIN -->
+												
+												<input class="article-input" type="text" name="setlogin" placeholder="Nom d'utilisateur" />
+											</td>
+										</tr>
+                                                                                
+										<tr>
+											<td>
+												<!-- PASSWORD -->
+												<input class="article-input" type="password" name="setpassword" placeholder="Mot de passe" />
+											</td>
+										</tr>
+                                                                                
+                                                                                <tr>
+											<!-- LOCALE -->
+                                                                                        <td class="label-select"><table class="full">{$timezone_html}</table></td>
+										</tr>
+                                                                                
+										<tr>
+											<td>
+												<!-- PAGE TITLE -->
+
+												<input class="article-input" type="text" name="title" value="{$title}" placeholder="Titre de la page" />
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td class="article-footer single">
+									<!-- SAVE -->
+                                                                        <table class="cmd">
+                                                                                <tr>
+                                                                                        <th><img src="images/save3.png#" /></th>
+                                                                                        <td><a onclick="submitterSimple('#installform'); return false;" href="#">ENREGISTRER</a></td>
+                                                                                </tr>
+                                                                        </table>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</td>
+				
+				<td>&nbsp;</td>
+			</tr>
+                   
             {include="page.footer"} 
-        </footer>
+        </table>
 
         {include="includes2"}
     </body>
