@@ -14,20 +14,20 @@
 				<td>&nbsp;</td>
 				
 				<td class="fixed">
-					<table class="full">
+					<table class="article full">
 						<tr>
 							<td class="article-title">
-                                                                <a name="{$value.linkdate|smallHash}" id="{$value.linkdate|smallHash}"></a>
+                                                                <a class="permalink" name="{$value.linkdate|smallHash}" id="{$value.linkdate|smallHash}"></a>
 								
 								<!-- TITLE -->
-                                                                <a href="{$redirector}{$value.url|htmlspecialchars}">{$value.title|htmlspecialchars}</a>
+                                                                <a class="title" href="{$redirector}{$value.url|htmlspecialchars}">{$value.title|htmlspecialchars}</a>
 							</td>
 						</tr>
 						<tr>
 							<td class="article-content">
                                                                 <!-- CONTENT -->
                                                                 <span class="image">{$value.url|thumbnail}</span>
-{if="$value.description"}{$value.description}{/if}
+                                                                <span class="description">{if="$value.description"}{$value.description}{/if}</span>
 							</td>
 						</tr>
 						<tr>
@@ -40,7 +40,7 @@
 								<table class="cmd">
 									<tr>
 										<th><img src="images/calendar{$value.class}.png#" /></th>
-										<td>{$value.localdate|htmlspecialchars}</td>
+										<td class="id">{$value.localdate|htmlspecialchars}</td>
 									</tr>
 								</table>
 
@@ -49,7 +49,7 @@
 								<table class="cmd">
 									<tr>
 										<th><img src="images/private{$value.class}.png#" /></th>
-										<td>Priv&eacute;</td>
+										<td class="private">Priv&eacute;</td>
 									</tr>
 								</table>
                                                                 {/if}
@@ -89,7 +89,7 @@
 						</tr>
                                                 
                                                 {if="$value.tags"}
-						<tr>
+						<tr class="tag">
 							<td class="article-footer double2">
                                                                 {loop="value.taglist "}
 								<!-- TAG -->

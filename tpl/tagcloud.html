@@ -25,14 +25,14 @@
                                                      </td>
                                              </tr>
                                              <tr>
-                                                     <td class="article-footer single">
+                                                     <td id="cloudtag" class="article-footer single">
                                                             {loop="tags"}
                                                             <!-- TAG -->
                                                              
                                                             <table class="cmd">
                                                                     <tr>
                                                                             <th><img src="images/tag4.png#" /></th>
-                                                                            <td><a href="?searchtags={$key|htmlspecialchars}"><span class="tag">{function="htmlspecialchars(mb_strtoupper($key,'UTF-8'))"}</span> (<span class="count">{$value.count}</span>)</a></td>
+                                                                            <td><a href="?searchtags={$key|htmlspecialchars}">(<span>{$value.count}</span>) <span>{function="htmlspecialchars(mb_strtoupper($key,'UTF-8'))"}</span></a></td>
                                                                     </tr>
                                                             </table>
                                                             
